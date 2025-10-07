@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - D'SignerTV</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+ <div class="main-login">
+    <!-- Lado esquerdo -->
+    <div class="left-login">
+      <div class="left-content">
+        <h1>D'SignerTV</h1>
+        <img src="dsdesenho.svg" class="left-login-image" alt="Desenho D'SignerTV">
+      </div>
+    </div>
+
+    <!-- Card de login -->
+    <div class="card-login">
+      <h1>LOGIN</h1>
+      <div class="textfield">
+        <input type="email" id="email" placeholder="Seu e-mail" />
+      </div>
+      <div class="textfield">
+        <input type="password" id="senha" placeholder="Sua senha" />
+      </div>
+      <button id="btn-login" class="btn-login">Entrar</button>
+      <p class="signup-link">Não tem conta? <a href="register.html">Registrar</a></p>
+    </div>
+  </div>
+
+  <!-- ✅ Corrigido: agora busca o app.js dentro da pasta painelcodes -->
+  <script type="module">
+    import { loginUser } from "./app.js";
+
+    // Previne reload no mobile (substitui comportamento padrão do botão)
+    const btn = document.getElementById("btn-login");
+    btn.addEventListener("click", async (e) => {
+      e.preventDefault(); // 🚫 impede recarregar a página
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value;
+      if (!email || !senha) {
+        alert("Informe e-mail e senha.");
+        return;
+      }
+      btn.disabled = true;
+      const original = btn.textContent;
+      btn.textContent = "Entrando...";
+      try {
+        await loginUser(email, senha);
+      } catch (err) {
+        console.error(err);
+        alert("Falha ao fazer login.");
+      } finally {
+        btn.disabled = false;
+        btn.textContent = original;
+      }
+    });
+  </script>
+</body>
+</html>

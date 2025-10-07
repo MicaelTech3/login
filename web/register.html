@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registrar - D'SignerTV</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="main-login">
+    <div class="card-login">
+      <h1>Registrar</h1>
+      <div class="textfield">
+        <input type="email" id="email" placeholder="Seu e-mail" />
+      </div>
+      <div class="textfield">
+        <input type="password" id="senha" placeholder="Crie uma senha" />
+      </div>
+      <button id="btn-register" class="btn-login">Cadastrar</button>
+      <p class="signup-link">Já tem conta? <a href="index.html">Login</a></p>
+    </div>
+  </div>
+
+  <script type="module">
+    import { registerUser } from "./app.js";
+    document.getElementById("btn-register").addEventListener("click", () => {
+      const email = document.getElementById("email").value.trim();
+      const senha = document.getElementById("senha").value;
+      registerUser(email, senha);
+    });
+  </script>
+</body>
+</html>

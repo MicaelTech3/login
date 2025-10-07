@@ -1,0 +1,125 @@
+/* ===== Layout base ===== */
+.painel {
+  padding: 24px;
+  display: grid;
+  gap: 16px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.hidden { display: none; }
+
+/* ===== Banner / mensagens ===== */
+.banner {
+  background: #27213a;
+  border: 1px solid #3e355d;
+  padding: 10px 12px;
+  border-radius: 10px;
+}
+.banner.warn { border-color: #b08a1c; }
+.banner.danger { border-color: #ff5b5b; background: #3a2121; }
+
+/* ===== Barra inferior fixa (abas) ===== */
+.bottombar {
+  position: fixed;
+  left: 50%;
+  bottom: 16px;
+  transform: translateX(-50%);
+  z-index: 20;
+}
+.button-container {
+  display: flex;
+  background-color: #00ff88;           /* verde igual ao ASSINAR */
+  color: #000;
+  width: 320px;
+  height: 56px;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 16px;
+  box-shadow:
+    rgba(0,0,0,.35) 0 5px 15px,
+    rgba(0,255,136,.45) 5px 10px 15px;
+}
+.button {
+  outline: 0 !important;
+  border: 0 !important;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;                          /* ícones pretos sobre verde */
+  transition: transform .2s ease;
+  cursor: pointer;
+}
+.button:hover { transform: translateY(-3px); }
+.icon { width: 22px; height: 22px; }
+
+/* ===== Menu de perfil (abre no clique) ===== */
+.profile-menu {
+  position: fixed;
+  left: 50%;
+  bottom: 86px;                         /* acima da barra */
+  transform: translateX(-50%);
+  background: #27213a;
+  border: 1px solid #3e355d;
+  border-radius: 12px;
+  padding: 10px 12px;
+  min-width: 260px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  display: grid;
+  gap: 10px;
+  z-index: 25;
+}
+.profile-email { color: #ddd; font-size: 14px; word-break: break-all; }
+.btn-logout {
+  padding: 10px 12px;
+  border: none;
+  border-radius: 10px;
+  background: #ff6b6b;
+  color: #000;
+  font-weight: 800;
+  cursor: pointer;
+}
+.btn-logout:hover { filter: brightness(.95); }
+
+/* ===== Popover do carrinho ===== */
+.cart-popover {
+  position: fixed;
+  left: 50%;
+  bottom: 86px;                         /* acima da barra */
+  transform: translateX(-50%);
+  background: #27213a;
+  border: 1px solid #3e355d;
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-width: 320px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.4);
+  z-index: 25;
+}
+
+.row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+
+.countdown { display: flex; gap: 10px; align-items: center; font-weight: 600; }
+.pill { background: #27213a; border: 1px solid #3e355d; padding: 6px 10px; border-radius: 999px; }
+
+.btn-upgrade {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+  background: #00ff88;                  /* mesmo verde */
+  color: #000;
+  box-shadow: 0 10px 40px -12px #00ff8052;
+  transition: filter .25s ease;
+}
+.btn-upgrade:hover { filter: brightness(.95); }
+.btn-upgrade[disabled] { opacity: .6; cursor: not-allowed; }
+
+#profile-menu[hidden],
+#cart-popover[hidden] {
+  display: none !important;
+}

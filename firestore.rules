@@ -1,0 +1,29 @@
+rules_version = "2";
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAuthed() { return request.auth != null; }
+
+    function userDoc() {
+      return get(/databases/$(database)/documents/users/$(request.auth.uid));
+    }
+
+    function planAllowed() {
+      return userDoc().data.plan == "pro"
+        || request.time.toMillis() <= userDoc().data.trialEnd.toMillis();
+    }
+
+    match /users/{uid} {
+      allow read: if isAuthed() && request.auth.uid == uid;
+      allow update: if isAuthed() && request.auth.uid == uid
+        && !(("plan" in request.resource.data) ||
+             ("trialEnd" in request.resource.data) ||
+             ("suspicious" in request.resource.data));
+      allow create, delete: if false;
+    }
+
+    match /appData/{doc=**} {
+      allow read, write: if isAuthed() && planAllowed();
+    }
+  }
+}
